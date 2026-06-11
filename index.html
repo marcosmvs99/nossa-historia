@@ -40,33 +40,33 @@
     }
 
     /* PLAYER */
-    
     .player{
-    position:fixed;
-    top:12px;
-    left:12px;
-    right:12px;
-    z-index:999;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:10px 12px;
-    background:rgba(0,0,0,.78);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:12px;
-    box-shadow:var(--shadow);
-    backdrop-filter: blur(8px);
+      position:fixed;
+      top:10px;
+      left:10px;
+      right:10px;
+      z-index:999;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:8px 10px;
+      background:rgba(0,0,0,.82);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(8px);
     }
 
-
     .player-track{
-      font-size:.9rem;
+      font-size:.85rem;
       color:#fff;
-      max-width: 220px;
+      flex:1;
+      min-width:0;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      text-align:left;
     }
 
     .player button{
@@ -93,22 +93,20 @@
     }
 
     /* TELAS */
-    
     .screen{
-    display:none;
-    width:100%;
-    height:100vh;
-    padding:110px 22px 90px;
-    position:absolute;
-    inset:0;
-    overflow-y:auto;
-    overflow-x:hidden;
-    animation:fadeIn .45s ease;
-    background:
+      display:none;
+      width:100%;
+      height:100dvh;
+      padding:100px 18px 110px;
+      position:absolute;
+      inset:0;
+      overflow-y:auto;
+      overflow-x:hidden;
+      animation:fadeIn .45s ease;
+      background:
         radial-gradient(circle at top right, rgba(229,9,20,.08), transparent 26%),
         linear-gradient(180deg, rgba(255,255,255,.01), transparent);
     }
-
 
     .screen.active{
       display:flex;
@@ -182,6 +180,7 @@
       flex-wrap:wrap;
       justify-content:center;
       margin-top:18px;
+      width:100%;
     }
 
     /* CONTEÚDO PADRÃO */
@@ -232,6 +231,7 @@
       font-size: clamp(1rem, 1.8vw, 1.12rem);
       line-height:1.9;
       color:#f3f3f3;
+      width:100%;
     }
 
     .text-block p + p{
@@ -380,6 +380,7 @@
       flex-wrap:wrap;
       justify-content:center;
       margin-top:4px;
+      width:100%;
     }
 
     .chip{
@@ -404,8 +405,9 @@
       gap:12px;
       flex-wrap:wrap;
       justify-content:center;
-      margin-top:8px;
-      margin-bottom:20px;
+      margin-top:14px;
+      margin-bottom:12px;
+      width:100%;
     }
 
     /* MODAL */
@@ -448,113 +450,128 @@
     }
 
     /* RESPONSIVO */
-@media (max-width: 840px){
-    .player{
+    @media (max-width: 840px){
+      .player{
         top:10px;
         left:10px;
         right:10px;
-        padding:10px;
+        padding:8px 10px;
         gap:8px;
-    }
+      }
 
-    .player-track{
-        max-width:50vw;
-        font-size:.85rem;
-    }
+      .player-track{
+        max-width:none;
+        font-size:.82rem;
+      }
 
-    .gallery img{
-        width:190px;
-        height:260px;
-    }
+      .gallery img{
+        width:180px;
+        height:250px;
+      }
 
-    .screen{
-        padding:105px 16px 95px;
-    }
+      .screen{
+        padding:105px 16px 115px;
+      }
 
-    .episode-wrap{
-        gap:10px;
-    }
+      .episode-title{
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+      }
 
-    .episode-title{
-        font-size: clamp(1.8rem, 7vw, 2.6rem);
-    }
-
-    .text-block{
+      .text-block{
         font-size:1rem;
         line-height:1.75;
-    }
+      }
     }
 
     @media (max-width: 540px){
-    .player{
-        flex-direction:column;
-        align-items:stretch;
-        gap:8px;
-    }
-
-    .player-track{
-        max-width:100%;
-        text-align:center;
-        font-size:.82rem;
-    }
-
-    .player button{
-        width:100%;
-    }
-
-    .actions,
-    .nav{
-        width:100%;
-    }
-
-    .btn{
-        width:100%;
-        padding:14px 18px;
-    }
-
-    .chips{
+      .player{
         display:grid;
-        width:100%;
-        grid-template-columns:1fr;
-    }
+        grid-template-columns:1fr auto auto;
+        align-items:center;
+        gap:8px;
+        padding:8px 10px;
+      }
 
-    .chip{
-        width:100%;
-    }
+      .player button{
+        padding:8px 10px;
+      }
 
-    .gallery{
-        gap:10px;
-        padding-bottom:8px;
-    }
-
-    .gallery img{
-        width:160px;
-        height:220px;
-    }
-
-    .screen{
-        padding:120px 14px 110px;
-    }
-
-    .episode-title{
-        font-size:1.9rem;
-    }
-
-    .episode-subtag,
-    .episode-tag{
+      .player-track{
+        text-align:left;
         font-size:.8rem;
-    }
+      }
 
-    .text-block{
+      .screen{
+        padding:110px 14px 120px;
+      }
+
+      .episode-wrap{
+        gap:10px;
+        width:100%;
+      }
+
+      .episode-title{
+        font-size:1.9rem;
+        line-height:1.1;
+      }
+
+      .episode-tag,
+      .episode-subtag{
+        font-size:.78rem;
+      }
+
+      .text-block{
         width:100%;
         font-size:.98rem;
         line-height:1.7;
+      }
+
+      .actions,
+      .nav{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+        padding:14px 18px;
+      }
+
+      .chips{
+        display:grid;
+        grid-template-columns:1fr;
+        width:100%;
+      }
+
+      .chip{
+        width:100%;
+      }
+
+      .gallery{
+        gap:10px;
+        padding-bottom:8px;
+      }
+
+      .gallery img{
+        width:150px;
+        height:210px;
+      }
+
+      .nav{
+        position:sticky;
+        bottom:0;
+        left:0;
+        right:0;
+        z-index:50;
+        background:linear-gradient(to top, rgba(17,17,17,0.98), rgba(17,17,17,0.82));
+        padding:12px 0 calc(10px + env(safe-area-inset-bottom));
+        margin-top:18px;
+      }
     }
 
-    .nav{
-        margin-top:12px;
-        gap:10px;
-    }
+    @media (max-width: 420px){
+      .player-track{
+        font-size:.75rem;
+      }
     }
   </style>
 </head>
@@ -665,7 +682,7 @@
       </div>
 
       <div class="placeholder">
-        Nem todo capítulo tem imagens… 
+        Nem todo capítulo tem imagens… alguns só deixam saudade.
       </div>
 
       <div class="nav">
@@ -1000,7 +1017,7 @@
       updateTrackLabel(name);
 
       audio.play().catch(() => {
-        // Alguns navegadores só liberam depois do primeiro clique, mas a navegação já conta como interação
+        // o clique da navegação normalmente já libera o áudio no mobile
       });
     }
 
@@ -1033,9 +1050,11 @@
       if (!next) return;
 
       next.classList.add("active");
+
+      window.scrollTo(0, 0);
       next.scrollTop = 0;
 
-      // Regra: EP3 fica em silêncio absoluto
+      // EP3 = silêncio total
       if (id === "screen-ep3") {
         stopTrack(true);
         return;
