@@ -1,1 +1,1067 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Nossa História</title></head><body><h1>❤️ Nossa História</h1><p>Arquivo base GitHub Pages gerado.</p><p>Substitua este conteúdo pela versão completa posteriormente.</p></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nossa História ❤️</title>
+
+  <style>
+    :root{
+      --bg:#111111;
+      --bg-soft:#171717;
+      --bg-black:#000000;
+      --text:#ffffff;
+      --muted:#cfcfcf;
+      --red:#e50914;
+      --red-dark:#b20710;
+      --green:#1db954;
+      --card:#1f1f1f;
+      --shadow:0 10px 32px rgba(0,0,0,.45);
+      --radius:14px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html, body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body{
+      position:relative;
+    }
+
+    /* PLAYER */
+    .player{
+      position:fixed;
+      top:12px;
+      right:12px;
+      z-index:999;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      background:rgba(0,0,0,.75);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(8px);
+      max-width: calc(100vw - 24px);
+    }
+
+    .player-track{
+      font-size:.9rem;
+      color:#fff;
+      max-width: 220px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .player button{
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      padding:8px 12px;
+      transition:.25s ease;
+    }
+
+    .player button:hover{
+      transform:scale(1.04);
+    }
+
+    .btn-mini{
+      background:#fff;
+      color:#111;
+    }
+
+    .btn-mini.secondary{
+      background:rgba(255,255,255,.12);
+      color:#fff;
+    }
+
+    /* TELAS */
+    .screen{
+      display:none;
+      width:100%;
+      height:100vh;
+      padding:84px 22px 28px;
+      position:absolute;
+      inset:0;
+      overflow-y:auto;
+      overflow-x:hidden;
+      animation:fadeIn .45s ease;
+      background:
+        radial-gradient(circle at top right, rgba(229,9,20,.08), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.01), transparent);
+    }
+
+    .screen.active{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    @keyframes fadeIn{
+      from{ opacity:0; transform:translateY(16px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    /* CAPA */
+    .screen.hero{
+      background:
+        linear-gradient(to top, rgba(17,17,17,1) 0%, rgba(17,17,17,.35) 45%, rgba(17,17,17,.75) 100%),
+        url("fotos/capa.jpg") no-repeat center center / cover;
+    }
+
+    .screen.hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,.42);
+      z-index:0;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      max-width:900px;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:7px 14px;
+      border-radius:999px;
+      background:rgba(229,9,20,.12);
+      border:1px solid rgba(229,9,20,.35);
+      color:#ffdfe1;
+      font-size:.82rem;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+
+    .hero-title{
+      font-size: clamp(2.5rem, 7vw, 5.4rem);
+      line-height:1.02;
+      margin-bottom:14px;
+      text-shadow:0 3px 20px rgba(0,0,0,.35);
+    }
+
+    .hero-sub{
+      font-size: clamp(1rem, 2.3vw, 1.25rem);
+      max-width:760px;
+      margin:0 auto 12px;
+    }
+
+    .hero-meta{
+      color:#ffcccc;
+      margin-bottom:20px;
+      font-weight:600;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:18px;
+    }
+
+    /* CONTEÚDO PADRÃO */
+    .episode-wrap{
+      width:min(1100px, 100%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+
+    .episode-tag{
+      font-size:.85rem;
+      letter-spacing:2px;
+      color:var(--red);
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .episode-subtag{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:rgba(255,255,255,.8);
+      font-size:.9rem;
+      margin-top:4px;
+    }
+
+    .episode-title{
+      font-size: clamp(2rem, 4.8vw, 3.5rem);
+      line-height:1.08;
+      margin-top:6px;
+    }
+
+    .music-label{
+      color:var(--green);
+      font-weight:700;
+      margin-bottom:4px;
+    }
+
+    .music-label.silent{
+      color:#cfcfcf;
+    }
+
+    .text-block{
+      max-width:880px;
+      font-size: clamp(1rem, 1.8vw, 1.12rem);
+      line-height:1.9;
+      color:#f3f3f3;
+    }
+
+    .text-block p + p{
+      margin-top:12px;
+    }
+
+    .highlight{
+      font-size:1.12rem;
+      font-weight:700;
+      color:#fff;
+    }
+
+    /* EP3 */
+    .screen.break{
+      background:
+        radial-gradient(circle at top center, rgba(255,255,255,.02), transparent 28%),
+        linear-gradient(180deg, #020202 0%, #000 100%);
+    }
+
+    .screen.break .episode-title{
+      color:#f5f5f5;
+    }
+
+    .placeholder{
+      width:min(800px, 100%);
+      min-height:130px;
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:22px;
+      color:rgba(255,255,255,.75);
+      background:rgba(255,255,255,.02);
+      font-style:italic;
+      margin-top:10px;
+    }
+
+    /* FUTURO */
+    .screen.future{
+      background:
+        radial-gradient(circle at top, rgba(255,120,160,.10), transparent 28%),
+        linear-gradient(180deg, #0a0a0a 0%, #141414 38%, #0f0f0f 100%);
+    }
+
+    .future-note{
+      display:inline-flex;
+      padding:12px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff2f4;
+      font-weight:800;
+      margin-top:10px;
+    }
+
+    /* GALERIAS */
+    .gallery{
+      width:100%;
+      display:flex;
+      gap:14px;
+      overflow-x:auto;
+      padding:8px 4px 14px;
+      justify-content:flex-start;
+      margin-top:10px;
+      scroll-snap-type:x proximity;
+    }
+
+    .gallery::-webkit-scrollbar{
+      height:8px;
+    }
+
+    .gallery::-webkit-scrollbar-thumb{
+      background:rgba(255,255,255,.18);
+      border-radius:999px;
+    }
+
+    .gallery img{
+      width:220px;
+      height:300px;
+      object-fit:cover;
+      border-radius:14px;
+      flex-shrink:0;
+      scroll-snap-align:start;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      transition:transform .3s ease, opacity .3s ease, filter .3s ease;
+      background:var(--card);
+    }
+
+    .gallery:hover img{
+      opacity:.45;
+      filter:saturate(.9);
+    }
+
+    .gallery img:hover{
+      opacity:1;
+      transform:scale(1.06);
+      filter:saturate(1.05);
+    }
+
+    /* BOTÕES */
+    .btn{
+      border:none;
+      cursor:pointer;
+      font-weight:800;
+      padding:14px 26px;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      transition:.25s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .btn:hover{
+      transform:scale(1.04);
+    }
+
+    .btn-primary{
+      background:var(--red);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--red-dark);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.11);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .btn-white{
+      background:#fff;
+      color:#111;
+    }
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:4px;
+    }
+
+    .chip{
+      border:none;
+      cursor:pointer;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.14);
+      transition:.25s ease;
+    }
+
+    .chip:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.14);
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:8px;
+    }
+
+    /* MODAL */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.92);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1200;
+      padding:28px;
+    }
+
+    .modal.open{
+      display:flex;
+      animation:fadeIn .25s ease;
+    }
+
+    .modal img{
+      max-width:min(1100px, 92vw);
+      max-height:86vh;
+      border-radius:14px;
+      object-fit:contain;
+      box-shadow:0 18px 56px rgba(0,0,0,.62);
+    }
+
+    .modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      border:none;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      cursor:pointer;
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      font-size:1.1rem;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 840px){
+      .player{
+        left:12px;
+        right:12px;
+        top:12px;
+        justify-content:space-between;
+      }
+
+      .player-track{
+        max-width:48vw;
+      }
+
+      .gallery img{
+        width:190px;
+        height:260px;
+      }
+
+      .screen{
+        padding:88px 16px 24px;
+      }
+    }
+
+    @media (max-width: 540px){
+      .actions,
+      .nav{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .chips{
+        display:grid;
+        width:100%;
+        grid-template-columns:1fr;
+      }
+
+      .chip{
+        width:100%;
+      }
+
+      .player{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .player-track{
+        max-width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PLAYER -->
+  <div class="player" aria-label="player de música">
+    <span class="player-track" id="trackLabel">Nenhuma música tocando</span>
+    <button class="btn-mini" id="btnPlay" type="button">▶</button>
+    <button class="btn-mini secondary" id="btnPause" type="button">❚❚</button>
+  </div>
+
+  <!-- CAPA -->
+  <section class="screen hero active" id="screen-intro" data-track="" data-track-name="">
+    <div class="hero-content">
+      <span class="badge">SÉRIE ORIGINAL DO CORAÇÃO</span>
+      <h1 class="hero-title">NOSSA HISTÓRIA ❤️</h1>
+      <p class="hero-meta">11 anos juntos • 4 anos de casamento</p>
+      <p class="hero-sub">
+        Baseado em uma história real. Com encontros, recomeços, fé, amor,
+        saudade, reencontros e a certeza de que algumas histórias foram feitas para durar.
+      </p>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="button" data-go="screen-ep1">▶ Assistir</button>
+        <button class="btn btn-secondary" type="button" data-go="screen-ep1">Mais informações</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EP1 -->
+  <section class="screen" id="screen-ep1" data-track="musicas/a-gente-nem-ficou.mp3" data-track-name="A Gente Nem Ficou">
+    <div class="episode-wrap">
+      <span class="episode-tag">EPISÓDIO 1</span>
+      <span class="episode-subtag">Nosso início</span>
+      <h2 class="episode-title">A Gente Nem Ficou</h2>
+      <p class="music-label">🎵 A Gente Nem Ficou</p>
+
+      <div class="text-block">
+        <p>
+          Há 11 anos, nossas vidas se cruzaram quase sem querer. Nada parecia tão grandioso
+          à primeira vista — a gente nem ficou. Mas talvez justamente por isso tenha sido tão especial:
+          não começou com certezas, começou com possibilidade.
+        </p>
+        <p>
+          E, sem perceber, ali nascia o capítulo mais importante da minha vida.
+          O que parecia pequeno virou imenso. O que parecia passageiro virou história.
+          E aquele encontro tão simples acabou se transformando em tudo o que hoje faz meu coração se sentir em casa.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-ep1"></div>
+
+      <div class="nav">
+        <button class="btn btn-white" type="button" data-manual-track="musicas/a-gente-nem-ficou.mp3" data-manual-track-name="A Gente Nem Ficou">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-ep2">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EP2 -->
+  <section class="screen" id="screen-ep2" data-track="musicas/parece-que-o-vento.mp3" data-track-name="Parece Que o Vento">
+    <div class="episode-wrap">
+      <span class="episode-tag">EPISÓDIO 2</span>
+      <span class="episode-subtag">Início do namoro</span>
+      <h2 class="episode-title">Parece Que o Vento</h2>
+      <p class="music-label">🎵 Parece Que o Vento</p>
+
+      <div class="text-block">
+        <p>
+          O tempo passou, e de repente já não era só sobre encontros, conversas e risadas.
+          Era sobre presença. Sobre sentir que, aos poucos, tudo ficava mais bonito quando você estava por perto.
+        </p>
+        <p>
+          Como o vento, que a gente não vê, mas sente, o amor foi chegando devagar — e ficou.
+          Foi nessa fase que o “eu” começou a dar espaço para o “nós”.
+          E sem perceber, eu já não imaginava mais a vida sem o teu jeito, a tua voz e a paz que você trazia pros meus dias.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-ep2"></div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-ep1">← Voltar</button>
+        <button class="btn btn-white" type="button" data-manual-track="musicas/parece-que-o-vento.mp3" data-manual-track-name="Parece Que o Vento">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-ep3">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EP3 -->
+  <section class="screen break" id="screen-ep3" data-track="" data-track-name="">
+    <div class="episode-wrap">
+      <span class="episode-tag">EPISÓDIO 3</span>
+      <span class="episode-subtag">Nosso término</span>
+      <h2 class="episode-title">Silêncio</h2>
+      <p class="music-label silent">🔇 Sem música nesse capítulo</p>
+
+      <div class="text-block">
+        <p>
+          Nem toda história é feita só de momentos felizes.
+          Teve um tempo em que o silêncio falou mais alto que qualquer palavra.
+        </p>
+        <p>
+          Teve distância, saudade e um vazio difícil de explicar.
+          Mas algumas histórias… não terminam assim.
+        </p>
+      </div>
+
+      <div class="placeholder">
+        Nem todo capítulo tem imagens… alguns só deixam saudade.
+      </div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-ep2">← Voltar</button>
+        <button class="btn btn-primary" type="button" data-go="screen-ep4">Continuar →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EP4 -->
+  <section class="screen" id="screen-ep4" data-track="musicas/juntos-outra-vez.mp3" data-track-name="Juntos Outra Vez">
+    <div class="episode-wrap">
+      <span class="episode-tag">EPISÓDIO 4</span>
+      <span class="episode-subtag">Nossa volta</span>
+      <h2 class="episode-title">Juntos Outra Vez</h2>
+      <p class="music-label">🎵 Juntos Outra Vez</p>
+
+      <div class="text-block">
+        <p>
+          E então… a gente voltou. Mais maduros, mais fortes, mais conscientes do que realmente importava.
+          Não foi apenas um recomeço. Foi a continuação de algo que, no fundo, nunca tinha deixado de ser amor.
+        </p>
+        <p>
+          Voltamos diferentes, mas com a mesma essência.
+          E dessa vez com ainda mais certeza, mais carinho e mais vontade de construir uma vida que fizesse sentido lado a lado.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-ep4"></div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-ep3">← Voltar</button>
+        <button class="btn btn-white" type="button" data-manual-track="musicas/juntos-outra-vez.mp3" data-manual-track-name="Juntos Outra Vez">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-ep5">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EP5 -->
+  <section class="screen" id="screen-ep5" data-track="musicas/pra-sonhar.mp3" data-track-name="Pra Sonhar">
+    <div class="episode-wrap">
+      <span class="episode-tag">EPISÓDIO 5</span>
+      <span class="episode-subtag">Casamento na igreja</span>
+      <h2 class="episode-title">Pra Sonhar</h2>
+      <p class="music-label">🎵 Pra Sonhar</p>
+
+      <div class="text-block">
+        <p>
+          E então o sonho virou realidade. Diante de Deus e diante de tudo o que acreditamos,
+          a gente escolheu viver oficialmente a vida lado a lado. Não foi só um “sim”.
+          Foi a confirmação de uma história inteira.
+        </p>
+        <p>
+          Ali estavam o amor, a fé, a espera, os recomeços e a certeza de que tudo nos trouxe até aquele altar.
+          Foi um daqueles momentos que a alma guarda para sempre.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-ep5"></div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-ep4">← Voltar</button>
+        <button class="btn btn-white" type="button" data-manual-track="musicas/pra-sonhar.mp3" data-manual-track-name="Pra Sonhar">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-ep6">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EP6 -->
+  <section class="screen" id="screen-ep6" data-track="musicas/alianca.mp3" data-track-name="Aliança">
+    <div class="episode-wrap">
+      <span class="episode-tag">EPISÓDIO 6</span>
+      <span class="episode-subtag">Casamento na festa</span>
+      <h2 class="episode-title">Aliança</h2>
+      <p class="music-label">🎵 Aliança</p>
+
+      <div class="text-block">
+        <p>
+          Depois do “sim”, veio a celebração. A alegria de dividir com o mundo um amor que já era certeza dentro do coração.
+          Entre sorrisos, abraços, música e emoção, cada detalhe parecia dizer a mesma coisa: chegou a nossa hora.
+        </p>
+        <p>
+          Não era apenas uma festa. Era a comemoração de tudo o que vencemos, de tudo o que sonhamos e de tudo o que ainda viveríamos dali em diante.
+          Era a nossa história sendo celebrada da forma mais linda.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-ep6"></div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-ep5">← Voltar</button>
+        <button class="btn btn-white" type="button" data-manual-track="musicas/alianca.mp3" data-manual-track-name="Aliança">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-viagens">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIAGENS -->
+  <section class="screen" id="screen-viagens" data-track="musicas/cant-stop.mp3" data-track-name="Can’t Stop">
+    <div class="episode-wrap">
+      <span class="episode-tag">ESPECIAL</span>
+      <span class="episode-subtag">Nossas viagens</span>
+      <h2 class="episode-title">Nossas Aventuras</h2>
+      <p class="music-label">🎵 Can’t Stop • Música Ligera • Sky Full</p>
+
+      <div class="text-block">
+        <p>
+          E foi vivendo que a gente colecionou memórias. Cada cidade, cada estrada, cada embarque e cada descoberta
+          deixaram marcas bonitas em nós. Viajar contigo nunca foi só mudar de lugar — foi ampliar o coração.
+        </p>
+        <p>
+          Porque não importa para onde fôssemos, o melhor destino sempre foi estar ao teu lado.
+          Entre paisagens novas e momentos inesquecíveis, fomos escrevendo capítulos felizes pelo caminho.
+        </p>
+      </div>
+
+      <div class="chips">
+        <button class="chip" type="button" data-manual-track="musicas/cant-stop.mp3" data-manual-track-name="Can’t Stop">▶ Can’t Stop</button>
+        <button class="chip" type="button" data-manual-track="musicas/musica-ligera.mp3" data-manual-track-name="Música Ligera">▶ Música Ligera</button>
+        <button class="chip" type="button" data-manual-track="musicas/sky-full.mp3" data-manual-track-name="Sky Full">▶ Sky Full</button>
+      </div>
+
+      <div class="gallery" id="gallery-viagens"></div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-ep6">← Voltar</button>
+        <button class="btn btn-primary" type="button" data-go="screen-final">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="screen" id="screen-final" data-track="musicas/best-part.mp3" data-track-name="Best Part">
+    <div class="episode-wrap">
+      <span class="episode-tag">FINAL</span>
+      <span class="episode-subtag">Nosso presente</span>
+      <h2 class="episode-title">Best Part</h2>
+      <p class="music-label">🎵 Best Part</p>
+
+      <div class="text-block">
+        <p>
+          Hoje, olhando para tudo o que vivemos, eu só consigo sentir gratidão.
+          Por cada fase, cada escolha, cada retorno, cada aprendizado.
+          Construímos algo raro: um amor leve, forte, verdadeiro e capaz de florescer em todas as estações.
+        </p>
+        <p>
+          O nosso dia a dia, com suas simplicidades e pequenas rotinas, virou exatamente aquilo que eu sempre sonhei sem saber explicar.
+          E o mais bonito de tudo é perceber que, mesmo depois de tantos capítulos, eu ainda encontro em você o meu melhor lugar.
+        </p>
+        <p class="highlight">
+          Porque você é, e sempre será, a melhor parte da minha vida.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-final"></div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-viagens">← Voltar</button>
+        <button class="btn btn-white" type="button" data-manual-track="musicas/best-part.mp3" data-manual-track-name="Best Part">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-futuro">Próximo →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURO -->
+  <section class="screen future" id="screen-futuro" data-track="musicas/sorte.mp3" data-track-name="Sorte">
+    <div class="episode-wrap">
+      <span class="episode-tag">PRÓXIMOS CAPÍTULOS</span>
+      <span class="episode-subtag">Nosso futuro</span>
+      <h2 class="episode-title">O Que Ainda Vamos Viver</h2>
+      <p class="music-label">🎵 Sorte</p>
+
+      <div class="text-block">
+        <p>
+          E quando eu penso no futuro, eu não penso apenas em lugares, planos ou promessas. Eu penso em nós.
+          Penso nos sonhos que ainda vamos realizar, nas histórias que ainda vamos viver e nos caminhos que ainda vamos construir lado a lado.
+        </p>
+        <p>
+          Eu vejo a gente andando por Paris, descobrindo a China, se encantando com a Grécia,
+          colecionando novos horizontes e transformando cada destino em memória.
+          Porque mais bonito do que qualquer lugar no mundo… é saber que estaremos juntos nele.
+        </p>
+        <p>
+          E entre todos esses sonhos, existe um que faz o coração bater diferente:
+          imaginar a nossa família crescendo, imaginar a vida florescendo ainda mais,
+          imaginar o amor ganhando novas formas, novos sorrisos e novos motivos para agradecer.
+        </p>
+        <p class="highlight">
+          Porque ter você na minha vida já é a maior sorte que eu poderia ter.
+          E se o futuro for com você, então eu sei que o melhor ainda está por vir.
+        </p>
+      </div>
+
+      <div class="gallery" id="gallery-futuro"></div>
+
+      <div class="future-note">O melhor capítulo ainda será escrito ❤️</div>
+
+      <div class="nav">
+        <button class="btn btn-secondary" type="button" data-go="screen-final">← Voltar</button>
+        <button class="btn btn-white" type="button" data-manual-track="musicas/sorte.mp3" data-manual-track-name="Sorte">▶ Tocar Música</button>
+        <button class="btn btn-primary" type="button" data-go="screen-intro">Voltar ao início ↑</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal" id="imageModal" aria-hidden="true">
+    <button class="modal-close" id="closeModal" aria-label="Fechar imagem">✕</button>
+    <img id="modalImg" src="" alt="Imagem ampliada">
+  </div>
+
+  <script>
+    // ===============================
+    // CONFIG DAS GALERIAS
+    // ===============================
+    const galleries = {
+      "gallery-ep1": [
+        "fotos/ep1/foto1.jpg",
+        "fotos/ep1/foto2.jpg",
+        "fotos/ep1/foto3.jpg"
+      ],
+      "gallery-ep2": [
+        "fotos/ep2/foto1.jpg",
+        "fotos/ep2/foto2.jpg",
+        "fotos/ep2/foto3.jpg"
+      ],
+      "gallery-ep4": [
+        "fotos/ep4/foto1.jpg",
+        "fotos/ep4/foto2.jpg",
+        "fotos/ep4/foto3.jpg",
+        "fotos/ep4/foto4.jpg"
+      ],
+      "gallery-ep5": [
+        "fotos/ep5/foto1.jpg",
+        "fotos/ep5/foto2.jpg",
+        "fotos/ep5/foto3.jpg"
+      ],
+      "gallery-ep6": [
+        "fotos/ep6/foto1.jpg",
+        "fotos/ep6/foto2.jpg",
+        "fotos/ep6/foto3.jpg"
+      ],
+      "gallery-viagens": [
+        "fotos/viagens/fortaleza1.jpg",
+        "fotos/viagens/fortaleza2.jpg",
+        "fotos/viagens/salvador1.jpg",
+        "fotos/viagens/salvador2.jpg",
+        "fotos/viagens/natal1.jpg",
+        "fotos/viagens/natal2.jpg",
+        "fotos/viagens/joaopessoa1.jpg",
+        "fotos/viagens/joaopessoa2.jpg",
+        "fotos/viagens/saopaulo1.jpg",
+        "fotos/viagens/saopaulo2.jpg",
+        "fotos/viagens/gramado1.jpg",
+        "fotos/viagens/gramado2.jpg",
+        "fotos/viagens/curitiba1.jpg",
+        "fotos/viagens/curitiba2.jpg",
+        "fotos/viagens/buenosaires1.jpg",
+        "fotos/viagens/buenosaires2.jpg",
+        "fotos/viagens/colonia1.jpg",
+        "fotos/viagens/colonia2.jpg",
+        "fotos/viagens/bonito1.jpg",
+        "fotos/viagens/bonito2.jpg",
+        "fotos/viagens/cataratas1.jpg",
+        "fotos/viagens/cataratas2.jpg",
+        "fotos/viagens/rock1.jpg",
+        "fotos/viagens/rock2.jpg",
+        "fotos/viagens/rock3.jpg"
+      ],
+      "gallery-final": [
+        "fotos/final/foto1.jpg",
+        "fotos/final/foto2.jpg",
+        "fotos/final/foto3.jpg",
+        "fotos/final/foto4.jpg",
+        "fotos/final/foto5.jpg",
+        "fotos/final/foto6.jpg",
+        "fotos/final/foto7.jpg",
+        "fotos/final/foto8.jpg",
+        "fotos/final/foto9.jpg"
+      ],
+      "gallery-futuro": [
+        "fotos/futuro/foto1.jpg",
+        "fotos/futuro/foto2.jpg",
+        "fotos/futuro/foto3.jpg",
+        "fotos/futuro/foto4.jpg"
+      ]
+    };
+
+    // ===============================
+    // AUDIO
+    // ===============================
+    let audio = null;
+    let currentSrc = "";
+    let currentTrackName = "Nenhuma música tocando";
+
+    const trackLabel = document.getElementById("trackLabel");
+    const btnPlay = document.getElementById("btnPlay");
+    const btnPause = document.getElementById("btnPause");
+
+    function updateTrackLabel(name) {
+      trackLabel.textContent = name || "Nenhuma música tocando";
+    }
+
+    function stopTrack(showSilent = true) {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      audio = null;
+      currentSrc = "";
+      currentTrackName = showSilent ? "Capítulo em silêncio" : "Nenhuma música tocando";
+      updateTrackLabel(currentTrackName);
+    }
+
+    function playTrack(src, name = "Trilha especial") {
+      if (!src) {
+        stopTrack(true);
+        return;
+      }
+
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+
+      audio = new Audio(src);
+      audio.volume = 0.65;
+      audio.loop = true;
+
+      currentSrc = src;
+      currentTrackName = name;
+      updateTrackLabel(name);
+
+      audio.play().catch(() => {
+        // Alguns navegadores só liberam depois do primeiro clique, mas a navegação já conta como interação
+      });
+    }
+
+    function pauseTrack() {
+      if (audio) {
+        audio.pause();
+      }
+    }
+
+    function resumeTrack() {
+      if (audio) {
+        audio.play().catch(() => {});
+      } else if (currentSrc) {
+        playTrack(currentSrc, currentTrackName);
+      }
+    }
+
+    btnPause.addEventListener("click", pauseTrack);
+    btnPlay.addEventListener("click", resumeTrack);
+
+    // ===============================
+    // TELAS / NAVEGAÇÃO
+    // ===============================
+    const screens = document.querySelectorAll(".screen");
+
+    function showScreen(id) {
+      screens.forEach(screen => screen.classList.remove("active"));
+
+      const next = document.getElementById(id);
+      if (!next) return;
+
+      next.classList.add("active");
+      next.scrollTop = 0;
+
+      // Regra: EP3 fica em silêncio absoluto
+      if (id === "screen-ep3") {
+        stopTrack(true);
+        return;
+      }
+
+      const autoTrack = next.dataset.track || "";
+      const autoTrackName = next.dataset.trackName || "";
+
+      if (autoTrack) {
+        playTrack(autoTrack, autoTrackName);
+      } else {
+        stopTrack(false);
+      }
+    }
+
+    document.querySelectorAll("[data-go]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.go;
+        showScreen(target);
+      });
+    });
+
+    // Botões manuais de tocar música
+    document.querySelectorAll("[data-manual-track]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const src = btn.dataset.manualTrack || "";
+        const name = btn.dataset.manualTrackName || "Trilha especial";
+        if (src) playTrack(src, name);
+      });
+    });
+
+    // ===============================
+    // GALERIAS
+    // ===============================
+    function renderGallery(containerId, files) {
+      const container = document.getElementById(containerId);
+      if (!container || !files || !files.length) return;
+
+      files.forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `Imagem ${index + 1}`;
+        img.loading = "lazy";
+        container.appendChild(img);
+      });
+    }
+
+    Object.entries(galleries).forEach(([id, files]) => {
+      renderGallery(id, files);
+    });
+
+    // ===============================
+    // MODAL
+    // ===============================
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeModal = document.getElementById("closeModal");
+
+    function bindModal() {
+      document.querySelectorAll(".gallery img").forEach(img => {
+        img.addEventListener("click", () => {
+          modalImg.src = img.src;
+          modal.classList.add("open");
+          modal.setAttribute("aria-hidden", "false");
+        });
+      });
+    }
+
+    function closeImageModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      modalImg.src = "";
+    }
+
+    closeModal.addEventListener("click", closeImageModal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeImageModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) {
+        closeImageModal();
+      }
+    });
+
+    bindModal();
+  </script>
+</body>
+</html>
